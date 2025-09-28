@@ -2,9 +2,14 @@ import travelPlansData from "../assets/travel-plans.json";
 import { useState } from "react";
 function TravelList() {
   const [travels, setTravelsToDisplay] = useState(travelPlansData);
-function update(){
   
-}
+  const deleteTravel = (travelId) => {
+    const newList = travels.filter((travelItem, i, arr) => {
+      return travelItem.id !== travelId;
+    });
+
+    setTravelsToDisplay(newList);
+  };
   return (
     <>
       {travels.map((travelObj, i, arr) => {
@@ -39,7 +44,7 @@ function update(){
               {caja}
               {inclusive}
 
-              <button className="dltbutton"> Delete </button>
+              <button onClick={() => deleteTravel(travelObj.id)} className="dltbutton"> Delete </button>
             </div>
           </div>
         );
